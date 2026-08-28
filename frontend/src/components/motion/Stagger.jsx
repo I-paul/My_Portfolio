@@ -1,22 +1,24 @@
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
-export default function Stagger({ children, staggerDelay = 0.1 }) {
+export default function Stagger({ children, staggerDelay = 0.08, className }) {
+  const shouldReduce = useReducedMotion()
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: staggerDelay,
+        staggerChildren: shouldReduce ? 0 : staggerDelay,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: shouldReduce ? 0 : 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: shouldReduce ? 0.1 : 0.45, ease: "easeOut" },
     },
   }
 
@@ -25,7 +27,8 @@ export default function Stagger({ children, staggerDelay = 0.1 }) {
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      className={className}
     >
       {Array.isArray(children)
         ? children.map((child, i) => (

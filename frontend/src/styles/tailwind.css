@@ -1,9 +1,330 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+   Primary accent  : electric blue  #3B82F6
+   Secondary accent: dark emerald   #065F46 / #10B981
+   Base            : near-black     #0A0A0A
+   Surface         : #111111 / #171717
+───────────────────────────────────────────── */
+
+@theme {
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Base palette */
+  --color-base: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-2: #171717;
+  --color-border: #262626;
+  --color-border-hover: #3B82F6;
+
+  /* Electric blue — primary accent */
+  --color-accent-blue: #3B82F6;
+  --color-accent-blue-light: #4F8CFF;
+  --color-accent-blue-dim: rgba(59, 130, 246, 0.15);
+  --color-accent-blue-glow: rgba(59, 130, 246, 0.08);
+
+  /* Dark emerald — secondary accent */
+  --color-accent-emerald: #10B981;
+  --color-accent-emerald-deep: #065F46;
+  --color-accent-emerald-dim: rgba(16, 185, 129, 0.15);
 }
 
-* {
+/* ─────────────────────────────────────────────
+   BASE RESET & TYPOGRAPHY
+───────────────────────────────────────────── */
+
+html {
   scroll-behavior: smooth;
+  background-color: var(--color-base);
+  color: #f5f5f5;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Display font for headings */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ─────────────────────────────────────────────
+   FOCUS RINGS — accessible, on-brand
+───────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR STYLING
+───────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-blue);
+}
+
+/* ─────────────────────────────────────────────
+   NOISE TEXTURE OVERLAY (hero depth)
+   Pure CSS, pointer-events-none, zero perf cost
+───────────────────────────────────────────── */
+
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ─────────────────────────────────────────────
+   HERO GLOW
+───────────────────────────────────────────── */
+
+.hero-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(59, 130, 246, 0.10) 0%,
+    rgba(59, 130, 246, 0.04) 40%,
+    transparent 70%
+  );
+}
+
+/* ─────────────────────────────────────────────
+   CARD HOVER — lift + border glow
+───────────────────────────────────────────── */
+
+.card-interactive {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08), 0 0 0 1px rgba(59, 130, 246, 0.15);
+}
+
+/* ─────────────────────────────────────────────
+   SCROLL PROGRESS BAR
+───────────────────────────────────────────── */
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-accent-blue), var(--color-accent-blue-light));
+  z-index: 100;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   TIMELINE
+───────────────────────────────────────────── */
+
+.timeline-line {
+  position: absolute;
+  left: 1.25rem;
+  top: 2.5rem;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-accent-blue), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   PREFERS REDUCED MOTION
+   Disable non-essential motion for users who request it.
+   Framer Motion also reads this internally for most animations.
+───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-interactive:hover {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CUSTOM CURSOR — hide native on fine-pointer devices
+───────────────────────────────────────────── */
+
+@media (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+
+  body.custom-cursor-active a,
+  body.custom-cursor-active button {
+    cursor: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CURSOR RIPPLE
+───────────────────────────────────────────── */
+
+@keyframes cursor-ripple {
+  0% {
+    width: 4px;
+    height: 4px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 44px;
+    height: 44px;
+    opacity: 0;
+  }
+}
+
+.cursor-ripple-active {
+  animation: cursor-ripple 350ms ease-out forwards;
+}
+
+/* ─────────────────────────────────────────────
+   IP MONOGRAM WOBBLE — playful click animation
+   Quick 0.4s spring-style wiggle, emerald tint at apex.
+   Disabled under prefers-reduced-motion.
+───────────────────────────────────────────── */
+
+@keyframes ip-wobble {
+  0%   { transform: rotate(0deg); color: inherit; }
+  20%  { transform: rotate(-12deg); }
+  40%  { transform: rotate(10deg); }
+  60%  { transform: rotate(-6deg); }
+  80%  { transform: rotate(4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.ip-wobble-active {
+  animation: ip-wobble 0.42s ease-out both;
+  color: #10B981;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ip-wobble-active {
+    animation: none;
+    color: inherit;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION LABEL MONO
+───────────────────────────────────────────── */
+
+.section-label {
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent-blue);
+}
+
+/* ─────────────────────────────────────────────
+   STAT CALLOUT — emerald accent
+───────────────────────────────────────────── */
+
+.stat-callout {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-accent-emerald);
+  background: var(--color-accent-emerald-dim);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.85rem;
+}
+
+/* ─────────────────────────────────────────────
+   SKILL CHIP
+───────────────────────────────────────────── */
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: #d4d4d4;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.skill-chip:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10B981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-chip:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   PROJECT THUMBNAIL PLACEHOLDER
+───────────────────────────────────────────── */
+
+.project-thumb {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem 0.75rem 0 0;
+  background: var(--color-surface-2);
+}
+
+.project-thumb svg {
+  width: 100%;
+  height: 100%;
 }

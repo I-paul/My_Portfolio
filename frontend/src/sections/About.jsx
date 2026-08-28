@@ -1,43 +1,119 @@
 import Container from "@/components/ui/Container"
 import Heading from "@/components/ui/Heading"
-import Text from "@/components/ui/Text"
-import Card from "@/components/ui/Card"
+import SectionLabel from "@/components/ui/SectionLabel"
 import Reveal from "@/components/motion/Reveal"
+import Stagger from "@/components/motion/Stagger"
 import { personalInfo } from "@/data/personal"
 
-export default function About() {
-  const highlights = [
-    {
-      title: "Experience",
-      description: "Building modern web applications with a focus on performance and user experience",
-    },
-    {
-      title: "Passion",
-      description: "Continuously learning new technologies and best practices in web development",
-    },
-    {
-      title: "Approach",
-      description: "Writing clean, maintainable code with attention to detail and scalability",
-    },
-  ]
+const highlights = [
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+        />
+      </svg>
+    ),
+    title: "Full-Stack Engineering",
+    description:
+      "Building end-to-end applications with React on the frontend and Node.js, FastAPI, or Express on the backend — with a focus on clean APIs and maintainable architecture.",
+  },
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+        />
+      </svg>
+    ),
+    title: "AI/ML Integration",
+    description:
+      "Studying B.Tech in AI and Machine Learning, with hands-on experience in real-time object tracking (PyTorch + OpenCV) and face-recognition systems deployed in production.",
+  },
+  {
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M13 10V3L4 14h7v7l9-11h-7z"
+        />
+      </svg>
+    ),
+    title: "Performance-Driven",
+    description:
+      "Optimized a newsletter platform that cut load time by 1.4s and boosted UI responsiveness by 60%. Reducing query latency and bundle size isn't an afterthought — it's part of the design.",
+  },
+]
 
+export default function About() {
   return (
     <section id="about" className="py-24 bg-neutral-950/50">
       <Container>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <Reveal>
-            <Heading className="mb-12 text-center">About Me</Heading>
+            <SectionLabel number="04">About</SectionLabel>
+            <Heading className="mb-8">About Me</Heading>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
-            {highlights.map((item, index) => (
-              <Reveal key={index}>
-                <Card>
-                  <h3 className="text-xl font-medium mb-3">{item.title}</h3>
-                  <Text className="text-neutral-300!">{item.description}</Text>
-                </Card>
-              </Reveal>
+
+          {/* Real bio paragraph */}
+          <Reveal delay={0.1}>
+            <p className="text-neutral-300 text-base md:text-lg leading-relaxed max-w-3xl mb-14">
+              {personalInfo.bio} Currently pursuing a B.Tech in Artificial Intelligence and Machine
+              Learning at St. Joseph&apos;s College of Engineering (Chennai), I&apos;ve shipped backend
+              systems at Slate Technologies and optimized production web apps at Frost &amp;
+              Sullivan — always with measurable impact on performance and reliability.
+            </p>
+          </Reveal>
+
+          {/* Highlight cards */}
+          <Stagger staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {highlights.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-6 h-full card-interactive"
+              >
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center mb-4 text-blue-400"
+                  style={{ background: "rgba(59,130,246,0.1)" }}
+                >
+                  {item.icon}
+                </div>
+                <h3 className="font-display text-base font-semibold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-neutral-400 text-sm leading-relaxed">{item.description}</p>
+              </div>
             ))}
-          </div>
+          </Stagger>
         </div>
       </Container>
     </section>

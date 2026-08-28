@@ -5,7 +5,17 @@ export const skills = [
   },
   {
     category: "Frameworks & Libraries",
-    items: ["React", "Node.js", "Express", "Tailwind CSS", "Firebase", "Framer Motion"],
+    items: [
+      "React",
+      "Node.js",
+      "Express",
+      "FastAPI",
+      "Tailwind CSS",
+      "Firebase",
+      "Framer Motion",
+      "PyTorch",
+      "OpenCV",
+    ],
   },
   {
     category: "Databases",
@@ -13,6 +23,14 @@ export const skills = [
   },
   {
     category: "Tools & Technologies",
-    items: ["Git", "VS Code", "PyTorch", "OpenCV", "RESTful APIs"],
+    items: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "Postman",
+      "Vercel",
+      "VS Code",
+      "RESTful APIs",
+    ],
   },
 ]

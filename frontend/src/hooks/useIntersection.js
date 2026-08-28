@@ -5,6 +5,9 @@ export default function useIntersection(options = {}) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    const el = ref.current // capture before async cleanup
+    if (!el) return
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true)
@@ -12,16 +15,13 @@ export default function useIntersection(options = {}) {
       }
     }, { threshold: 0.1, ...options })
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
+    observer.observe(el)
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
+      observer.unobserve(el)
     }
-  }, [options])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // options intentionally excluded: stable ref options passed at call site
 
   return [ref, isVisible]
 }

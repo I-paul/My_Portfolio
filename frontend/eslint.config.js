@@ -23,7 +23,10 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Variables starting with uppercase OR named 'motion' are exempt from unused-var check.
+      // 'motion' is used as a JSX namespace (motion.div etc.) — eslint-plugin-react would
+      // handle this automatically, but we avoid adding a dep just for this.
+      'no-unused-vars': ['error', { varsIgnorePattern: '^([A-Z_]|motion)' }],
     },
   },
 ])

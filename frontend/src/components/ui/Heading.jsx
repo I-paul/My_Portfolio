@@ -1,15 +1,16 @@
 import { cn } from "@/utils/cn"
-import TextFlow from "../motion/TextSmooth"
+
 const sizes = {
-  xl: "text-5xl md:text-7xl font-semibold",
-  lg: "text-4xl md:text-5xl font-semibold",
-  md: "text-2xl md:text-3xl font-medium",
+  xl: "text-5xl md:text-7xl font-semibold tracking-tight",
+  lg: "text-3xl md:text-4xl font-semibold tracking-tight",
+  md: "text-2xl md:text-3xl font-medium tracking-tight",
   sm: "text-xl font-medium",
 }
 
-export default function Heading({ as: Tag = "h2", size = "lg", className, children }) {
+export default function Heading({ as, size = "lg", className, children }) {
+  const Tag = as ?? "h2"
   return (
-    <Tag className={cn(sizes[size], "tracking-tight", className)}>
+    <Tag className={cn("font-display", sizes[size], className)}>
       {children}
     </Tag>
   )
