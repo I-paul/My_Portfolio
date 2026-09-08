@@ -38,7 +38,7 @@ function LinkedInIcon() {
 export default function Contact() {
   return (
     <section id="contact" className="relative py-24 bg-neutral-950 overflow-hidden">
-      <DecorativeLines variant="circuit" className="top-0 left-1/2 -translate-x-1/2 w-[1000px] text-blue-500/10 z-0" />
+      <DecorativeLines variant="circuit" className="top-0 left-1/2 -translate-x-1/2 w-[1000px] z-0" />
       <Container className="relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
@@ -59,7 +59,7 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+            <p className="text-neutral-200 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
               I&apos;m always open to discussing new projects, internships, and full-time opportunities.
               Whether you have a question or just want to say hi — my inbox is open.
             </p>
@@ -69,6 +69,7 @@ export default function Contact() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14">
               <Button
                 variant="primary"
+                data-fun-target="true"
                 onClick={() =>
                   (window.location.href = `mailto:${personalInfo.email}`)
                 }
@@ -78,6 +79,7 @@ export default function Contact() {
               {personalInfo.resumeAvailable && (
                 <Button
                   variant="outline"
+                  data-fun-target="true"
                   onClick={() => window.open(personalInfo.resume, "_blank")}
                 >
                   View Résumé ↗
@@ -93,7 +95,8 @@ export default function Contact() {
                 href={personalInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2 rounded"
+                data-fun-target="true"
+                className="flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2 rounded"
                 aria-label="Israel Paul on GitHub"
               >
                 <GitHubIcon />
@@ -103,7 +106,8 @@ export default function Contact() {
                 href={personalInfo.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2 rounded"
+                data-fun-target="true"
+                className="flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2 rounded"
                 aria-label="Israel Paul on LinkedIn"
               >
                 <LinkedInIcon />

@@ -116,6 +116,7 @@ export default function Navbar() {
                 <a
                   key={href}
                   href={href}
+                  data-fun-target="true"
                   className={[
                     "text-sm transition-colors duration-200 relative focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2 rounded",
                     isActive(href)
@@ -133,6 +134,7 @@ export default function Navbar() {
                   href={personalInfo.resume}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-fun-target="true"
                   className="rounded-full border border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 px-4 py-1.5 text-sm font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400 focus-visible:outline-offset-2"
                 >
                   Résumé ↗

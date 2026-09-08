@@ -47,7 +47,7 @@ function SkillCategory({ category, items }) {
         className="flex flex-wrap gap-2"
       >
         {items.map((skill) => (
-          <span key={skill} className="skill-chip">
+          <span key={skill} data-fun-target="true" className="skill-chip">
             {SKILL_ICONS[skill] && (
               <span aria-hidden="true" className="text-xs">{SKILL_ICONS[skill]}</span>
             )}

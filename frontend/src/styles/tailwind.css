@@ -14,21 +14,22 @@
 
   /* Base palette */
   --color-base: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-2: #171717;
-  --color-border: #262626;
+  --color-surface: #13151c;
+  --color-surface-2: #181b24;
+  --color-surface-elevated: #1a1e2a;
+  --color-border: #262b38;
   --color-border-hover: #3B82F6;
 
   /* Electric blue — primary accent */
   --color-accent-blue: #3B82F6;
-  --color-accent-blue-light: #4F8CFF;
-  --color-accent-blue-dim: rgba(59, 130, 246, 0.15);
-  --color-accent-blue-glow: rgba(59, 130, 246, 0.08);
+  --color-accent-blue-light: #60A5FA;
+  --color-accent-blue-dim: rgba(59, 130, 246, 0.18);
+  --color-accent-blue-glow: rgba(59, 130, 246, 0.12);
 
   /* Dark emerald — secondary accent */
   --color-accent-emerald: #10B981;
   --color-accent-emerald-deep: #065F46;
-  --color-accent-emerald-dim: rgba(16, 185, 129, 0.15);
+  --color-accent-emerald-dim: rgba(16, 185, 129, 0.18);
 }
 
 /* ─────────────────────────────────────────────
@@ -38,7 +39,146 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-base);
-  color: #f5f5f5;
+  color: #f8fafc;
+}
+
+/* Fun mode root Iron Man Gold/Red theme shift & cursor suppression */
+html.fun-mode-active {
+  scroll-behavior: auto !important;
+
+  /* Iron Man Hot Rod Red & Stark Gold Tokens */
+  --color-accent-blue: #ED1C24;
+  --color-accent-blue-light: #FF3B30;
+  --color-accent-blue-dim: rgba(237, 28, 36, 0.22);
+  --color-accent-blue-glow: rgba(237, 28, 36, 0.16);
+
+  --color-accent-emerald: #FFB800;
+  --color-accent-emerald-deep: #D97706;
+  --color-accent-emerald-dim: rgba(255, 184, 0, 0.22);
+
+  --color-border-hover: #FFB800;
+
+  filter: saturate(1.25) contrast(1.05);
+}
+
+/* Hide both system and custom cursors everywhere during fun mode */
+html.fun-mode-active,
+html.fun-mode-active *,
+html.fun-mode-active body,
+html.fun-mode-active a,
+html.fun-mode-active button {
+  cursor: none !important;
+}
+
+/* Iron Man palette overrides for Tailwind utility classes in fun mode */
+html.fun-mode-active .bg-blue-500 {
+  background-color: #ED1C24 !important;
+}
+html.fun-mode-active .bg-blue-500:hover {
+  background-color: #FF3B30 !important;
+}
+html.fun-mode-active .border-blue-500,
+html.fun-mode-active .border-blue-500\/50,
+html.fun-mode-active .border-blue-500\/30 {
+  border-color: rgba(255, 184, 0, 0.6) !important;
+}
+html.fun-mode-active .text-blue-400 {
+  color: #FFD700 !important;
+}
+html.fun-mode-active .text-blue-300 {
+  color: #FFE066 !important;
+}
+html.fun-mode-active .bg-blue-500\/10 {
+  background-color: rgba(237, 28, 36, 0.18) !important;
+}
+html.fun-mode-active .bg-emerald-900\/30 {
+  background-color: rgba(217, 119, 6, 0.3) !important;
+}
+html.fun-mode-active .border-emerald-700\/40 {
+  border-color: rgba(255, 184, 0, 0.4) !important;
+}
+html.fun-mode-active .text-emerald-400 {
+  color: #FFB800 !important;
+}
+html.fun-mode-active .bg-emerald-400 {
+  background-color: #FFD700 !important;
+}
+html.fun-mode-active .timeline-line {
+  background: linear-gradient(to bottom, #ED1C24, transparent) !important;
+}
+html.fun-mode-active .hero-glow {
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(237, 28, 36, 0.16) 0%,
+    rgba(255, 184, 0, 0.08) 40%,
+    transparent 70%
+  ) !important;
+}
+
+/* Joyful multi-color prismatic hover accents in fun mode */
+@keyframes rainbowGlow {
+  0% {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 184, 0, 0.45), 0 0 35px rgba(0, 245, 255, 0.25);
+  }
+  33% {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 0, 127, 0.45), 0 0 35px rgba(168, 85, 247, 0.25);
+  }
+  66% {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 255, 102, 0.45), 0 0 35px rgba(255, 215, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 184, 0, 0.45), 0 0 35px rgba(0, 245, 255, 0.25);
+  }
+}
+
+html.fun-mode-active .card-interactive:hover {
+  border-color: rgba(255, 184, 0, 0.8) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 184, 0, 0.45), 0 0 35px rgba(0, 245, 255, 0.25) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.fun-mode-active .card-interactive:hover {
+    animation: rainbowGlow 4s ease-in-out infinite;
+  }
+}
+
+html.fun-mode-active .skill-chip:hover {
+  border-color: #00F5FF !important;
+  color: #FFD700 !important;
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.45), 0 0 6px rgba(255, 0, 127, 0.35) !important;
+}
+
+html.fun-mode-active .fun-target-activated {
+  outline: 2px solid #FFD700 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 24px 8px rgba(255, 184, 0, 0.7), 0 0 16px rgba(0, 245, 255, 0.5), 0 0 12px rgba(237, 28, 36, 0.6) !important;
+}
+
+/* Saturated multi-color accent nodes on background HUD/schematics during fun mode */
+html.fun-mode-active .hud-node-cyan {
+  fill: #00F5FF !important;
+  stroke: #00F5FF !important;
+  filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.85)) !important;
+}
+html.fun-mode-active .hud-node-magenta {
+  fill: #FF007F !important;
+  stroke: #FF007F !important;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.85)) !important;
+}
+html.fun-mode-active .hud-node-purple {
+  fill: #A855F7 !important;
+  stroke: #A855F7 !important;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.85)) !important;
+}
+html.fun-mode-active .hud-node-lime {
+  fill: #00FF66 !important;
+  stroke: #00FF66 !important;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 102, 0.85)) !important;
+}
+html.fun-mode-active .hud-node-gold {
+  fill: #FFD700 !important;
+  stroke: #FFD700 !important;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.85)) !important;
 }
 
 body {
@@ -103,6 +243,33 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ─────────────────────────────────────────────
+   VIGNETTE OVERLAY (subtle focus pull to center)
+   Pure CSS, pointer-events-none
+───────────────────────────────────────────── */
+
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* ─────────────────────────────────────────────
+   HERO BACKDROP PANEL
+   Frosted backing panel ensuring decorative background
+   lines/canvas never cross readable text at full clarity
+───────────────────────────────────────────── */
+
+.hero-backdrop-panel {
+  background: rgba(15, 17, 24, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ─────────────────────────────────────────────
    HERO GLOW
 ───────────────────────────────────────────── */
 
@@ -124,17 +291,17 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ─────────────────────────────────────────────
-   CARD HOVER — lift + border glow
+   CARD HOVER & SURFACE — elevated charcoal depth
 ───────────────────────────────────────────── */
 
 .card-interactive {
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 .card-interactive:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08), 0 0 0 1px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(59, 130, 246, 0.16);
 }
 
 /* ─────────────────────────────────────────────
@@ -205,24 +372,52 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ─────────────────────────────────────────────
-   CURSOR RIPPLE
+   HUD RETICLE SPIN & REPULSOR PULSE
 ───────────────────────────────────────────── */
 
-@keyframes cursor-ripple {
-  0% {
-    width: 4px;
-    height: 4px;
-    opacity: 0.8;
+@keyframes hud-reticle-spin {
+  from {
+    transform: rotate(0deg);
   }
-  100% {
-    width: 44px;
-    height: 44px;
-    opacity: 0;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-.cursor-ripple-active {
-  animation: cursor-ripple 350ms ease-out forwards;
+.hud-reticle-spinning {
+  animation: hud-reticle-spin 12s linear infinite;
+}
+
+@keyframes repulsor-pulse {
+  0% {
+    width: 6px;
+    height: 6px;
+    opacity: 0.95;
+    border-color: rgba(147, 197, 253, 1);
+    box-shadow: 0 0 16px 4px rgba(59, 130, 246, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    width: 64px;
+    height: 64px;
+    opacity: 0;
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 32px 8px rgba(16, 185, 129, 0.4), inset 0 0 16px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.repulsor-pulse-active {
+  animation: repulsor-pulse 300ms cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+}
+
+/* ─────────────────────────────────────────────
+   FUN TARGET ACTIVATION GLOW (character collision)
+───────────────────────────────────────────── */
+
+.fun-target-activated {
+  outline: 2px solid #10B981 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 24px 6px rgba(16, 185, 129, 0.65) !important;
+  transition: outline 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 /* ─────────────────────────────────────────────

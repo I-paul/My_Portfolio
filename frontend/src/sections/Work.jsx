@@ -7,144 +7,27 @@ import Reveal from "@/components/motion/Reveal"
 import DecorativeLines from "@/components/motion/DecorativeLines"
 import { projects } from "@/data/projects"
 
-/* ─── SVG thumbnail icons ─────────────────────────────────────────────── */
+/* ─── Project thumbnail gradients — plain dual-accent blend, no icons ───────── */
 
-function CameraIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-10 h-10 text-blue-400/60"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.25}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8h12a2 2 0 012 2v4a2 2 0 01-2 2H3a2 2 0 01-2-2v-4a2 2 0 012-2z"
-      />
-    </svg>
-  )
+const PROJECT_GRADIENTS = {
+  4: "linear-gradient(135deg, rgba(59, 130, 246, 0.32) 0%, rgba(15, 23, 42, 0.95) 52%, rgba(6, 95, 70, 0.28) 100%)",
+  2: "radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.3) 0%, rgba(13, 19, 33, 0.92) 55%, rgba(59, 130, 246, 0.24) 100%)",
+  1: "linear-gradient(225deg, rgba(59, 130, 246, 0.3) 0%, rgba(10, 20, 25, 0.94) 50%, rgba(6, 95, 70, 0.34) 100%)",
+  3: "radial-gradient(circle at 20% 80%, rgba(6, 95, 70, 0.32) 0%, rgba(15, 23, 42, 0.92) 55%, rgba(59, 130, 246, 0.28) 100%)",
 }
 
-function SmileIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-10 h-10 text-blue-400/60"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.25}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-  )
-}
-
-function MailIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-10 h-10 text-blue-400/60"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.25}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-      />
-    </svg>
-  )
-}
-
-function FaceIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-10 h-10 text-blue-400/60"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.25}
-      aria-hidden="true"
-    >
-      {/* Face outline */}
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 2C8.134 2 5 5.134 5 9c0 2.386 1.11 4.51 2.845 5.88C6.67 15.6 6 16.72 6 18v1a1 1 0 001 1h10a1 1 0 001-1v-1c0-1.28-.67-2.4-1.845-3.12C17.89 13.51 19 11.386 19 9c0-3.866-3.134-7-7-7z"
-      />
-      {/* Eyes */}
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 9.5h.01M14.5 9.5h.01" />
-      {/* Scan lines */}
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7 6h.5M16.5 6H17M7 12h.5M16.5 12H17" />
-    </svg>
-  )
-}
-
-const ICONS = {
-  camera: CameraIcon,
-  smile: SmileIcon,
-  mail: MailIcon,
-  face: FaceIcon,
-}
-
-/** Generated SVG placeholder thumbnail — never shows a broken image */
-function PlaceholderThumb({ icon, initials }) {
-  const Icon = ICONS[icon] ?? CameraIcon
+/** Clean, smooth gradient blend of electric blue and dark emerald — no icons or glyphs */
+function PlaceholderThumb({ id }) {
+  const gradient =
+    PROJECT_GRADIENTS[id] ??
+    "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(6, 95, 70, 0.3) 100%)"
 
   return (
     <div
-      className="project-thumb flex items-center justify-center"
-      style={{
-        background:
-          "radial-gradient(ellipse at 30% 30%, rgba(59,130,246,0.12) 0%, transparent 70%), linear-gradient(135deg, #111111 0%, #0d1117 100%)",
-      }}
+      className="project-thumb w-full"
+      style={{ background: gradient }}
       aria-hidden="true"
-    >
-      {/* Grid dot pattern */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-5"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern
-            id={`dot-${initials}`}
-            x="0"
-            y="0"
-            width="20"
-            height="20"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="1" cy="1" r="1" fill="#3B82F6" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill={`url(#dot-${initials})`} />
-      </svg>
-
-      {/* Icon + initials */}
-      <div className="relative flex flex-col items-center gap-3">
-        <Icon />
-        <span
-          className="font-display text-2xl font-semibold tracking-widest"
-          style={{ color: "rgba(99,155,255,0.3)" }}
-        >
-          {initials}
-        </span>
-      </div>
-    </div>
+    />
   )
 }
 
@@ -186,13 +69,13 @@ function ExternalIcon() {
 
 function ProjectCard({ project }) {
   return (
-    <div className="rounded-xl border border-neutral-800 bg-neutral-900/40 overflow-hidden card-interactive group flex flex-col h-full">
+    <div
+      data-fun-target="true"
+      className="rounded-xl border border-neutral-800/80 bg-[#13151c]/90 backdrop-blur-md overflow-hidden card-interactive group flex flex-col h-full shadow-lg shadow-black/40"
+    >
       {/* Thumbnail */}
       {project.placeholder ? (
-        <PlaceholderThumb
-          icon={project.placeholderIcon}
-          initials={project.placeholderInitials}
-        />
+        <PlaceholderThumb id={project.id} />
       ) : (
         <img
           src={project.image}
@@ -208,7 +91,7 @@ function ProjectCard({ project }) {
         <h3 className="font-display text-base font-semibold text-white mb-2 group-hover:text-blue-300 transition-colors">
           {project.title}
         </h3>
-        <p className="text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+        <p className="text-neutral-300 text-sm leading-relaxed mb-4 flex-1">
           {project.description}
         </p>
 
@@ -258,7 +141,7 @@ function ProjectCard({ project }) {
 export default function Work() {
   return (
     <section id="work" className="relative py-24 overflow-hidden">
-      <DecorativeLines variant="bezier" className="bottom-0 -left-[10%] w-[1000px] text-emerald-500/10 -rotate-6 z-0" />
+      <DecorativeLines variant="bezier" className="bottom-0 -left-[10%] w-[1000px] -rotate-6 z-0" />
       <Container className="relative z-10">
         <Reveal>
           <SectionLabel number="03">Projects</SectionLabel>

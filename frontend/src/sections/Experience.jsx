@@ -45,7 +45,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative py-24 bg-neutral-950/40 overflow-hidden">
-      <DecorativeLines variant="circuit" className="top-10 -right-[20%] w-[800px] text-blue-500/10 rotate-12 z-0" />
+      <DecorativeLines variant="circuit" className="top-10 -right-[20%] w-[800px] rotate-12 z-0" />
       <Container className="relative z-10">
         <Reveal>
           <SectionLabel number="02">Experience</SectionLabel>
@@ -84,7 +84,10 @@ export default function Experience() {
                 </div>
 
                 {/* Content card */}
-                <div className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-7 card-interactive">
+                <div
+                  data-fun-target="true"
+                  className="rounded-xl border border-neutral-800/80 bg-[#13151c]/90 backdrop-blur-md p-7 card-interactive shadow-lg shadow-black/40"
+                >
                   {/* Header row */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
                     <div>
@@ -96,17 +99,17 @@ export default function Experience() {
                       </p>
                     </div>
                     <div className="text-right shrink-0">
-                      <span className="text-xs text-neutral-500 font-mono block">
+                      <span className="text-xs text-neutral-400 font-mono block">
                         {job.duration}
                       </span>
-                      <span className="text-xs text-neutral-600 block mt-0.5">
+                      <span className="text-xs text-neutral-500 block mt-0.5">
                         {job.location}
                       </span>
                     </div>
                   </div>
 
                   {/* Project label */}
-                  <p className="text-neutral-500 text-xs mb-5 flex items-center gap-1.5">
+                  <p className="text-neutral-400 text-xs mb-5 flex items-center gap-1.5">
                     <svg
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +131,7 @@ export default function Experience() {
                   {/* Achievement bullets */}
                   <ul className="space-y-3">
                     {job.achievements.map((ach, i) => (
-                      <li key={i} className="flex gap-3 text-sm text-neutral-300 leading-relaxed">
+                      <li key={i} className="flex gap-3 text-sm text-neutral-200 leading-relaxed">
                         <span
                           className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-blue-500"
                           aria-hidden="true"
@@ -150,7 +153,8 @@ export default function Experience() {
             {education.map((edu) => (
               <div
                 key={edu.institution}
-                className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-6 mt-5 card-interactive"
+                data-fun-target="true"
+                className="rounded-xl border border-neutral-800/80 bg-[#13151c]/90 backdrop-blur-md p-6 mt-5 card-interactive shadow-lg shadow-black/40"
               >
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <div>
@@ -160,8 +164,8 @@ export default function Experience() {
                     <p className="text-blue-400 text-sm mt-0.5">{edu.institution}</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="text-xs text-neutral-500 font-mono">{edu.duration}</span>
-                    <span className="text-xs text-neutral-600 block mt-0.5">{edu.location}</span>
+                    <span className="text-xs text-neutral-400 font-mono">{edu.duration}</span>
+                    <span className="text-xs text-neutral-500 block mt-0.5">{edu.location}</span>
                   </div>
                 </div>
               </div>

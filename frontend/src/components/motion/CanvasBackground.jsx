@@ -109,7 +109,7 @@ export default function CanvasBackground() {
       document.removeEventListener("visibilitychange", handleVisibilityChange)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [isReduced])
 
   if (isReduced) return null
 

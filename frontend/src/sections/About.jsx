@@ -86,7 +86,7 @@ export default function About() {
 
           {/* Real bio paragraph */}
           <Reveal delay={0.1}>
-            <p className="text-neutral-300 text-base md:text-lg leading-relaxed max-w-3xl mb-14">
+            <p className="text-neutral-200 text-base md:text-lg leading-relaxed max-w-3xl mb-14">
               {personalInfo.bio} Currently pursuing a B.Tech in Artificial Intelligence and Machine
               Learning at St. Joseph&apos;s College of Engineering (Chennai), I&apos;ve shipped backend
               systems at Slate Technologies and optimized production web apps at Frost &amp;
@@ -99,18 +99,19 @@ export default function About() {
             {highlights.map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-6 h-full card-interactive"
+                data-fun-target="true"
+                className="rounded-xl border border-neutral-800/80 bg-[#13151c]/90 backdrop-blur-md p-6 h-full card-interactive shadow-lg shadow-black/40"
               >
                 <div
                   className="w-9 h-9 rounded-lg flex items-center justify-center mb-4 text-blue-400"
-                  style={{ background: "rgba(59,130,246,0.1)" }}
+                  style={{ background: "rgba(59,130,246,0.12)" }}
                 >
                   {item.icon}
                 </div>
                 <h3 className="font-display text-base font-semibold text-white mb-2">
                   {item.title}
                 </h3>
-                <p className="text-neutral-400 text-sm leading-relaxed">{item.description}</p>
+                <p className="text-neutral-300 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </Stagger>

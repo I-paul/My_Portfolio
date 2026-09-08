@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="hero-glow relative z-0" aria-hidden="true" />
 
       <Container>
-        <div className="relative z-10 max-w-4xl">
+        <div className="relative z-10 max-w-4xl hero-backdrop-panel rounded-3xl p-6 sm:p-10 sm:py-12 border border-neutral-800/60 shadow-2xl">
 
           {/* Availability badge */}
           <motion.div
@@ -42,7 +42,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-neutral-400 text-lg mb-3 font-medium"
+            className="text-neutral-300 text-lg mb-3 font-medium"
           >
             Hi, I&apos;m
           </motion.p>
@@ -59,7 +59,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="font-display text-xl md:text-2xl font-medium text-neutral-300 mb-3 max-w-xl"
+            className="font-display text-xl md:text-2xl font-medium text-neutral-200 mb-3 max-w-xl"
           >
             {personalInfo.title}
           </motion.h2>
@@ -69,7 +69,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.85 }}
-            className="text-neutral-500 text-sm mb-6 flex items-center gap-2"
+            className="text-neutral-400 text-sm mb-6 flex items-center gap-2"
           >
             <svg
               aria-hidden="true"
@@ -99,7 +99,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.95 }}
-            className="text-neutral-400 text-base leading-relaxed max-w-2xl mb-10"
+            className="text-neutral-200 text-base leading-relaxed max-w-2xl mb-10"
           >
             {personalInfo.bio}
           </motion.p>
@@ -113,6 +113,7 @@ export default function Hero() {
           >
             <Button
               variant="primary"
+              data-fun-target="true"
               onClick={() => (window.location.href = "#contact")}
             >
               Get in touch
@@ -120,6 +121,7 @@ export default function Hero() {
             {personalInfo.resumeAvailable && (
               <Button
                 variant="outline"
+                data-fun-target="true"
                 onClick={() => window.open(personalInfo.resume, "_blank")}
               >
                 View Résumé ↗
